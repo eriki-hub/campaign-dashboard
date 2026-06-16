@@ -6,43 +6,57 @@
     <title>Campaign Dashboard</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
+        body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0f172a; color: #e2e8f0; padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
         }
         h1 { text-align: center; margin-bottom: 10px; color: #38bdf8; }
-        .subtitle { text-align: center; color: #64748b; margin-bottom: 30px; font-size: 14px; }
-        .stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap; }
+        .subtitle { text-align: center; color: #94a3b8; margin-bottom: 30px; font-size: 14px; }
+        .stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 30px; flex-wrap: wrap; }
         .stat { text-align: center; min-width: 100px; }
-        .stat-value { font-size: 36px; font-weight: bold; }
-        .stat-label { color: #64748b; font-size: 12px; text-transform: uppercase; }
+        .stat-value { font-size: 36px; font-weight: 700; }
+        .stat-label { color: #94a3b8; font-size: 12px; text-transform: uppercase; }
         .stat-active .stat-value { color: #22c55e; }
         .stat-complete .stat-value { color: #38bdf8; }
+        .stat-pending .stat-value { color: #f59e0b; }
         .stat-contacts .stat-value { color: #a855f7; }
+        .stat-bounced .stat-value { color: #fb7185; }
         table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 8px; overflow: hidden; }
-        th { background: #334155; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; color: #94a3b8; }
-        td { padding: 12px 16px; border-bottom: 1px solid #334155; }
+        th { background: #334155; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; color: #cbd5e1; }
+        td { padding: 12px 16px; border-bottom: 1px solid #334155; vertical-align: top; }
         tr:hover { background: #334155; }
-        .status { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .status { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; display: inline-block; text-transform: capitalize; }
         .status-active { background: #166534; color: #86efac; }
         .status-complete { background: #1e3a5f; color: #7dd3fc; }
-        .status-pending { background: #854d0e; color: #fde047; }
-        .touch { font-family: monospace; color: #fbbf24; }
-        .contacts { color: #a855f7; font-weight: 600; }
-        .company { color: #f1f5f9; font-weight: 500; }
+        .status-pending { background: #854d0e; color: #fde68a; }
+        .touch { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: #fbbf24; }
+        .contacts { color: #c084fc; font-weight: 700; }
+        .company { color: #f8fafc; font-weight: 600; }
+        .folder { margin-top: 4px; color: #64748b; font-size: 12px; font-weight: 500; }
         .next-step { color: #94a3b8; font-size: 13px; }
-        .next-step-touch { color: #fb923c; font-weight: 600; }
-        .next-step-date { color: #64748b; }
-        .next-step-done { color: #22c55e; }
+        .next-step-touch { color: #fb923c; font-weight: 700; }
+        .next-step-date { color: #94a3b8; }
+        .next-step-done { color: #22c55e; font-weight: 700; }
+        .bounced { display: block; margin-top: 4px; color: #fb7185; font-size: 12px; font-weight: 600; }
+        @media (max-width: 760px) {
+            body { padding: 12px; }
+            table { font-size: 13px; }
+            th, td { padding: 10px 8px; }
+            .stat-value { font-size: 28px; }
+        }
     </style>
 </head>
 <body>
-    <h1>📊 Campaign Dashboard</h1>
-    <div class="subtitle">Generated: 2026-03-26 12:05:38 EDT</div>
+    <h1>Campaign Dashboard</h1>
+    <div class="subtitle">Generated: 06/16/2026, 17:02:35 EDT</div>
     <div class="stats">
-        <div class="stat stat-active"><div class="stat-value">35</div><div class="stat-label">Active</div></div>
-        <div class="stat stat-complete"><div class="stat-value">76</div><div class="stat-label">Complete</div></div>
-        <div class="stat stat-contacts"><div class="stat-value">581</div><div class="stat-label">Total Contacts</div></div>
+        <div class="stat stat-active"><div class="stat-value">193</div><div class="stat-label">Active</div></div>
+        <div class="stat stat-complete"><div class="stat-value">31</div><div class="stat-label">Complete</div></div>
+        <div class="stat stat-pending"><div class="stat-value">5</div><div class="stat-label">Other</div></div>
+        <div class="stat stat-contacts"><div class="stat-value">809</div><div class="stat-label">Contacts</div></div>
+        <div class="stat stat-bounced"><div class="stat-value">41</div><div class="stat-label">Bounced</div></div>
     </div>
     <table>
         <thead>
@@ -56,781 +70,1607 @@
         </thead>
         <tbody>
             <tr>
-                <td class="company">1800 flowers</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">2talk</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">1-800-FLOWERS<div class="folder">1800-flowers</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-11</span></td>
             </tr>
             <tr>
-                <td class="company">adora pos</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">agento ai</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">1Password<div class="folder">1password</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
             </tr>
             <tr>
-                <td class="company">agentz</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">2Talk<div class="folder">2talk</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
             </tr>
             <tr>
-                <td class="company">aimnow v2</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">Actium Health<div class="folder">actium-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7<span class="bounced">3 bounced</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">ActivEngage<div class="folder">activengage</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">0</td>
+                <td class="touch">0/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 1</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">Adora POS<div class="folder">adora-pos</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
             </tr>
             <tr>
-                <td class="company">aimnow</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="company">AffordableHousing.com<div class="folder">affordable-housing</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
             </tr>
             <tr>
-                <td class="company">alita health</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">AgencyAI<div class="folder">agency-ai</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
             </tr>
             <tr>
-                <td class="company">armis</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">AimNow<div class="folder">aimnow</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-15</span></td>
+            </tr>
+            <tr>
+                <td class="company">Alita Health<div class="folder">alita-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">Always Answer<div class="folder">always-answer</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Ambience Healthcare<div class="folder">ambience-healthcare</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Answering Specialists<div class="folder">answering-specialists</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Artilo AI<div class="folder">artilo-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">0</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Asana<div class="folder">asana</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
             </tr>
             <tr>
-                <td class="company">artilo ai</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">Athena Care<div class="folder">athena-care</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2<span class="bounced">1 bounced</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Automation Anywhere<div class="folder">automation-anywhere</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Auxa Health<div class="folder">auxa-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Awaz.ai<div class="folder">awaz-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-05</span></td>
+            </tr>
+            <tr>
+                <td class="company">Bark Phone<div class="folder">bark-phone</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-04</span></td>
             </tr>
             <tr>
-                <td class="company">athena care</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">bamboohr</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">9</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">baycare v2</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">BayCare V2<div class="folder">baycare-v2</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
             </tr>
             <tr>
-                <td class="company">baycare</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="company">Bayshore HealthCare<div class="folder">bayshore-healthcare</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2<span class="bounced">1 bounced</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
             </tr>
             <tr>
-                <td class="company">best buy</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Best Buy<div class="folder">bestbuy</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Bluebot<div class="folder">bluebot</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Breesy.ai V2<div class="folder">breesy-ai-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">BridgeHealthAI<div class="folder">bridgehealthai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">CallAlly (trycallai.com)<div class="folder">trycallai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">CallAutomate.ai<div class="folder">callautomate</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">CallRail<div class="folder">callrail</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-05-18</span></td>
+            </tr>
+            <tr>
+                <td class="company">CallSquad.ai<div class="folder">callsquad-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-10T09:04:00-04:00</span></td>
+            </tr>
+            <tr>
+                <td class="company">CallVera<div class="folder">callvera</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">7</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
             </tr>
             <tr>
-                <td class="company">bluroot</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">breesy ai</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Cardinal Health<div class="folder">cardinal-health</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-09</span></td>
             </tr>
             <tr>
-                <td class="company">bunta ai</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">ChatServices AI<div class="folder">chatservices-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Check Point<div class="folder">checkpoint-v2</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
             </tr>
             <tr>
-                <td class="company">checkpoint</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="company">Clerk Chat<div class="folder">clerk-chat</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
             </tr>
             <tr>
-                <td class="company">clerk chat</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="company">CleverTap<div class="folder">clevertap</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
             </tr>
             <tr>
-                <td class="company">clevertap</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">ClickUp<div class="folder">clickup</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-15</span></td>
             </tr>
             <tr>
-                <td class="company">clickup</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">ClinicLine<div class="folder">clinicline</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">ClinicTitan<div class="folder">clinictitan</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-11</span></td>
+            </tr>
+            <tr>
+                <td class="company">Cloudflare<div class="folder">cloudflare</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Coinbase<div class="folder">coinbase</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Confluent<div class="folder">confluent</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Contact One Inc<div class="folder">contact-one-inc</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Conversica V2<div class="folder">conversica-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-11</span></td>
+            </tr>
+            <tr>
+                <td class="company">Crypto.com<div class="folder">crypto-com</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Customer Contact Services Inc<div class="folder">customer-contact-services</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">CyberArk<div class="folder">cyberark</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Dandy<div class="folder">dandy</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">10</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">DAT (DAT Freight &amp; Analytics)<div class="folder">dat</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Databricks<div class="folder">databricks</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Dav El BostonCoach<div class="folder">davel-bostoncoach</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Delfino AI<div class="folder">delfino-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-07</span></td>
+            </tr>
+            <tr>
+                <td class="company">Dentrix<div class="folder">dentrix</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2<span class="bounced">2 bounced</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span></td>
+            </tr>
+            <tr>
+                <td class="company">Dialbox<div class="folder">dialbox</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Docusign<div class="folder">docusign</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">12<span class="bounced">6 bounced</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Drata<div class="folder">drata</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Dropbox Voice AI<div class="folder">dropbox</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">easyscreen.ai V2<div class="folder">easyscreen-ai-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">eFax Corporate<div class="folder">efax-corporate</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">Encartele<div class="folder">encartele</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">EngageSpark<div class="folder">engagespark</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3<span class="bounced">1 bounced</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Engine<div class="folder">engine</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Everbridge<div class="folder">everbridge</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">9</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Floatbot<div class="folder">floatbot</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5<span class="bounced">1 bounced</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">FreshWorks<div class="folder">freshworks</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Fullscript<div class="folder">fullscript</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-07</span></td>
+            </tr>
+            <tr>
+                <td class="company">Gingr<div class="folder">gingr</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">GitLab<div class="folder">gitlab</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Glowing.io<div class="folder">glowing</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">0</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-20</span></td>
+            </tr>
+            <tr>
+                <td class="company">Glympse<div class="folder">glympse</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">Groupon<div class="folder">groupon</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
+            </tr>
+            <tr>
+                <td class="company">GrubDial<div class="folder">grubdial</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Gusto<div class="folder">gusto</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">HCA Healthcare<div class="folder">hca</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">HealthCall<div class="folder">healthcall</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Healthcare Outsourcing Network<div class="folder">healthcare-outsourcing-network</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">HealthTalk A.I.<div class="folder">healthtalk-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Helloforce<div class="folder">helloforce</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">HelloShift V2<div class="folder">helloshift-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Humming Agent AI<div class="folder">humming-agent-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Hyper-Reach<div class="folder">hyper-reach</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Illumio<div class="folder">illumio</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-09</span></td>
+            </tr>
+            <tr>
+                <td class="company">ImOn<div class="folder">imon</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3<span class="bounced">2 bounced</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">INFLATE AI<div class="folder">inflate-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Inphonite<div class="folder">inphonite</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">IronSIP<div class="folder">ironsip</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">ItsaCheckmate<div class="folder">itsacheckmate</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Jiffy Lube<div class="folder">jiffy-lube</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-20</span></td>
+            </tr>
+            <tr>
+                <td class="company">Kaiser Permanente<div class="folder">kaiser-permanente</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Keeper Security<div class="folder">keeper-security</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Kelli Care<div class="folder">kelli-care</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Kinetic AI<div class="folder">kinetic-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-04-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Kinetic AI (kineticai.ai)<div class="folder">kineticai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">kloudlyn.ai<div class="folder">kloudlyn</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">KYYBA<div class="folder">kyyba</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Labcorp<div class="folder">labcorp</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">0</td>
+                <td class="touch">0/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 1</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">LaunchDarkly<div class="folder">launchdarkly</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Lee Health<div class="folder">lee-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Lever<div class="folder">lever</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-15</span></td>
+            </tr>
+            <tr>
+                <td class="company">LimoLink<div class="folder">limolink</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Loris<div class="folder">loris</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-05-18</span></td>
+            </tr>
+            <tr>
+                <td class="company">Lowe&#39;s Companies<div class="folder">lowes</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8<span class="bounced">3 bounced</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">LQ Digital<div class="folder">lq-digital</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Lyft<div class="folder">lyft</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">Mass General Brigham<div class="folder">mass-general-brigham</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Medium AI<div class="folder">medium-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3<span class="bounced">2 bounced</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">MightyCall<div class="folder">mightycall</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-07</span></td>
+            </tr>
+            <tr>
+                <td class="company">Miro<div class="folder">miro</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">MockVisa<div class="folder">mockvisa</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-05-22</span></td>
+            </tr>
+            <tr>
+                <td class="company">Momentive (SurveyMonkey)<div class="folder">momentive</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
+            </tr>
+            <tr>
+                <td class="company">Motion<div class="folder">motion</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Motive<div class="folder">motive</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">N-able Technologies<div class="folder">n-able</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Narvar<div class="folder">narvar</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">New Relic<div class="folder">new-relic</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-31</span></td>
+            </tr>
+            <tr>
+                <td class="company">Numeo.ai<div class="folder">numeo-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Optum<div class="folder">optum</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">OrbitSim<div class="folder">orbitsim</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">OutofMaze AI<div class="folder">outofmaze-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">0</td>
+                <td class="touch">0/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 1</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">Ozonetel<div class="folder">ozonetel</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-04-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">PatientBond<div class="folder">patientbond</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-10</span></td>
+            </tr>
+            <tr>
+                <td class="company">PatientClick<div class="folder">patientclick</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">PatientlyAI<div class="folder">patientlyai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Pep Boys<div class="folder">pep-boys</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Ping Identity<div class="folder">ping-identity</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-11</span></td>
+            </tr>
+            <tr>
+                <td class="company">Pingtree<div class="folder">pingtree</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Pink Callers<div class="folder">pink-callers</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-05-22</span></td>
+            </tr>
+            <tr>
+                <td class="company">PlushCare<div class="folder">plushcare</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">10</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Priceline<div class="folder">priceline</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Prime Healthcare<div class="folder">prime-healthcare</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">PRMG (Paramount Residential Mortgage Group)<div class="folder">prmg</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Proofpoint<div class="folder">proofpoint</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Providence Health<div class="folder">providence-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Qtrac<div class="folder">qtrac</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Qualcomm<div class="folder">qualcomm</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Qualys<div class="folder">qualys</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-05</span></td>
+            </tr>
+            <tr>
+                <td class="company">RecruitBPM<div class="folder">recruitbpm</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Reply Pro<div class="folder">reply-pro</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">Reputation.com<div class="folder">reputation-com</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Rhino<div class="folder">rhino</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Secureframe<div class="folder">secureframe</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">SendMyCall<div class="folder">sendmycall</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-09</span></td>
+            </tr>
+            <tr>
+                <td class="company">shaling.ai<div class="folder">shaling-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">Simple Phones<div class="folder">simple-phones</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">SnapEngage<div class="folder">snapengage</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3<span class="bounced">2 bounced</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">SolarWinds<div class="folder">solarwinds</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">Solium AI<div class="folder">solium-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">SPLICE Software<div class="folder">splice-software</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Sprig<div class="folder">sprig</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
+            </tr>
+            <tr>
+                <td class="company">Sprinklr<div class="folder">sprinklr</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-09</span></td>
+            </tr>
+            <tr>
+                <td class="company">StaffAgent.AI<div class="folder">staffagent-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Starphone24<div class="folder">starphone24</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-11</span></td>
+            </tr>
+            <tr>
+                <td class="company">Startel V2<div class="folder">startel-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-11</span></td>
+            </tr>
+            <tr>
+                <td class="company">Sumo Logic<div class="folder">sumo-logic</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Tabit<div class="folder">tabit</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Talkroute Inc<div class="folder">talkroute</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-05-18</span></td>
+            </tr>
+            <tr>
+                <td class="company">Tanium<div class="folder">tanium</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">8</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">cloudflare</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">TeleDirect<div class="folder">teledirect</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Teletask V2<div class="folder">teletask-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Televerde<div class="folder">televerde</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-04</span></td>
+            </tr>
+            <tr>
+                <td class="company">TeleWizard<div class="folder">telewizard-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2<span class="bounced">1 bounced</span></td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">TextHub<div class="folder">texthub</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">The Corcoran Group<div class="folder">corcoran-group</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3<span class="bounced">3 bounced</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Think VoIP Services<div class="folder">think-voip</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">TLCx<div class="folder">tlcx</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Touchcast<div class="folder">touchcast</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
+            </tr>
+            <tr>
+                <td class="company">Trapeze Health<div class="folder">trapeze-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-02</span></td>
+            </tr>
+            <tr>
+                <td class="company">Trilliant Health<div class="folder">trilliant-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Trimble<div class="folder">trimble</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Trumpia<div class="folder">trumpia</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">5<span class="bounced">1 bounced</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">TVI MarketPro3<div class="folder">tvi-marketpro3</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-07</span></td>
+            </tr>
+            <tr>
+                <td class="company">Unifin V2<div class="folder">unifin-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-11</span></td>
+            </tr>
+            <tr>
+                <td class="company">Unite Us<div class="folder">unite-us</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Upland Software<div class="folder">upland-software</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">UpLift<div class="folder">joinuplift</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Uptrust (FieldWare)<div class="folder">uptrust</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
+            </tr>
+            <tr>
+                <td class="company">Upwork<div class="folder">upwork</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-05-29</span></td>
+            </tr>
+            <tr>
+                <td class="company">UVM Health Network<div class="folder">uvm-health</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6<span class="bounced">1 bounced</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">VC3, Inc.<div class="folder">vc3</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">VirtualHealth (Elligint Health)<div class="folder">virtualhealth</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-12</span></td>
+            </tr>
+            <tr>
+                <td class="company">VoiceDrop.Ai<div class="folder">voicedrop-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Voipia Networks<div class="folder">voipia-networks</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">Workhuman<div class="folder">workhuman</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
+            </tr>
+            <tr>
+                <td class="company">XRep.ai<div class="folder">xrep-ai</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Xtium V2<div class="folder">xtium-v2</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-08</span></td>
+            </tr>
+            <tr>
+                <td class="company">Zendesk<div class="folder">zendesk</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">Zingit Solutions<div class="folder">zingit-solutions</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">7<span class="bounced">3 bounced</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">Zipline<div class="folder">zipline</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">6<span class="bounced">3 bounced</span></td>
+                <td class="touch">4/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 5</span> <span class="next-step-date">after 2026-06-16</span></td>
+            </tr>
+            <tr>
+                <td class="company">ZipRecruiter<div class="folder">ziprecruiter</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">ZoomInfo<div class="folder">zoominfo</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Zscaler<div class="folder">zscaler</div></td>
+                <td><span class="status status-active">active</span></td>
                 <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="touch">2/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 3</span> <span class="next-step-date">after 2026-06-09</span></td>
             </tr>
             <tr>
-                <td class="company">coinbase</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">15</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="company">Zultys<div class="folder">zultys</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">8</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-05-27</span></td>
             </tr>
             <tr>
-                <td class="company">comm100</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Zuper<div class="folder">zuper</div></td>
+                <td><span class="status status-active">active</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">BambooHR<div class="folder">bamboohr</div></td>
+                <td><span class="status status-pending">pending</span></td>
+                <td class="contacts">6</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Caricomm<div class="folder">caricomm</div></td>
+                <td><span class="status status-pending">stopped</span></td>
+                <td class="contacts">0</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span> <span class="next-step-date">after 2026-06-01</span></td>
+            </tr>
+            <tr>
+                <td class="company">PTC<div class="folder">ptc</div></td>
+                <td><span class="status status-pending">stale-bounced</span></td>
+                <td class="contacts">2<span class="bounced">2 bounced</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">Samsara<div class="folder">samsara</div></td>
+                <td><span class="status status-pending">stopped</span></td>
+                <td class="contacts">10</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 2</span></td>
+            </tr>
+            <tr>
+                <td class="company">SLC Executive Dinner - June 17<div class="folder">slc-dinner</div></td>
+                <td><span class="status status-pending">paused</span></td>
+                <td class="contacts">32</td>
+                <td class="touch">3/5</td>
+                <td class="next-step"><span class="next-step-touch">Touch 4</span> <span class="next-step-date">after 2026-06-09</span></td>
+            </tr>
+            <tr>
+                <td class="company">Agentz<div class="folder">agentz</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">4</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">AMC Health<div class="folder">amc-health</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Audigy<div class="folder">audigy</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Bunta.ai<div class="folder">bunta-ai</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">CallNinja.ai<div class="folder">callninja-ai</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">CASSE Community Health Institute<div class="folder">casse</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Conversica<div class="folder">conversica</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">5<span class="bounced">3 bounced</span></td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Dealer Car Search<div class="folder">dealer-car-search</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">DXwand<div class="folder">dxwand</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">easyscreen.ai<div class="folder">easyscreen-ai</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">2</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">FaxLogic<div class="folder">faxlogic</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Greetmate AI<div class="folder">greetmate-ai</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Home365<div class="folder">home365</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">11</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">compass digital</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
+                <td class="company">Marco Technologies<div class="folder">marco-technologies</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">MD Revolution<div class="folder">md-revolution</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">5</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">consig ai</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">costco</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">cozeva</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">crypto com</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">MiaRec Voice API<div class="folder">miarec</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">1</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">dat</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">dayforce</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">9</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">dealer car search</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">dentrix</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">discount tire</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">docusign</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">doordash v2</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">doordash</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">drata</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">dxwand</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">encartele</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">everbridge</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">faxlogic</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">7</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">fleethoster</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">flex</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">9</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">flowhub</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">foundever</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Monopond<div class="folder">monopond</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">1</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">fullscript</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">myva.ai V2<div class="folder">myva-ai</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">NEOGOV<div class="folder">neogov</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">18</td>
+                <td class="touch">5/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">OmniAI<div class="folder">omniai</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">4</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">getdandy</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">gifthealth</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Opendoor<div class="folder">opendoor</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">10</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">glympse</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">PTC V2<div class="folder">ptc-v2</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">6</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">gotrg</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">greetmate ai</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">grubdial</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">healthtalk ai</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">helloshift</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">hioperator</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">inphonite</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">ironsip</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">jet2</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">7</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">kaiser permanente</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">10</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">kelli care</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">labcorp</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">lawnstarter</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">loris ai</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">7</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">monopond</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">narvar v2</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">7</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">narvar</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">neogov</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">open tech solutions</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">opendoor</td>
-                <td><span class="status status-active">Active</span></td>
+                <td class="company">QCall AI<div class="folder">qcall-ai</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">5</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">order co</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
+                <td class="company">ReturnPro<div class="folder">returnpro</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
+            </tr>
+            <tr>
+                <td class="company">Sophos<div class="folder">sophos</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">patientclick</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
+                <td class="company">Startel - Kelly Davis<div class="folder">startel-kelly-davis</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">1</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">pink callers</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">pretty good ai</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">priceline</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">prmg</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Tenet Healthcare<div class="folder">tenet-healthcare</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">15</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">property meld</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="company">Unifin<div class="folder">unifin</div></td>
+                <td><span class="status status-complete">complete</span></td>
+                <td class="contacts">3</td>
+                <td class="touch">1/5</td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">pyx health</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">11</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">qcall ai</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">USA Vein Clinics<div class="folder">usa-vein-clinics</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">1</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">recruitbpm</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">returnpro</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">ring savvy</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">robylon ai</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">rowcal</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Xtium<div class="folder">xtium</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">3</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
             <tr>
-                <td class="company">salesloft</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">solarwinds</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">splice software</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">subflow</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">supafunnel</td>
-                <td><span class="status status-complete">Complete</span></td>
+                <td class="company">Zingage<div class="folder">zingage</div></td>
+                <td><span class="status status-complete">complete</span></td>
                 <td class="contacts">1</td>
                 <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">sword health</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">14</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">talktomedi</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">teletask</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">3</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">telewizard v2</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">telewizard</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">texthub</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">thinkvoip</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">2</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">trapeze health</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">trumpia</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">15</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">tvi marketpro3</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">upland</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">17</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">upwork</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">vcaretec</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">voipia networks</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">5</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">wheels up</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">workday</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">10</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">yoppify</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">1</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">zendesk</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">6</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
-            </tr>
-            <tr>
-                <td class="company">zingage</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">4</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">ziprecruiter</td>
-                <td><span class="status status-active">Active</span></td>
-                <td class="contacts">7</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-date">—</span></td>
-            </tr>
-            <tr>
-                <td class="company">zoominfo</td>
-                <td><span class="status status-complete">Complete</span></td>
-                <td class="contacts">8</td>
-                <td class="touch">5/5</td>
-                <td class="next-step"><span class="next-step-done">✓ Done</span></td>
+                <td class="next-step"><span class="next-step-done">Done</span></td>
             </tr>
         </tbody>
     </table>
